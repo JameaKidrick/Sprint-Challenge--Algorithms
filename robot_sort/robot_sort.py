@@ -8,6 +8,8 @@ class SortingRobot:
         self._position = 0      # The list position the robot is at
         self._light = "OFF"     # The state of the robot's light
         self._time = 0          # A time counter (stretch)
+    def __str__(self):
+        print(f'~ The full list is {self._list}. \n~ I am holding {self._item}. \nI am at position {self._position}.')
 
     def can_move_right(self):
         """
@@ -96,15 +98,82 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        # [5, 4, 3, 2, 1]
+
+        # robot will pick up item
+            # position = 0
+            # list[position] = 5
+            # 5
+        # moves position to find smallest number in list
+            # position = 4
+            # list[position] = 1
+            # item = 5
+        # compares item to position item
+            #  5 > 1
+        # swap
+            # [4, 3, 2, 5]
+            # item = 1
+        # moves left 1 to place smaller value
+
+        # [5, 4, 3, 2, 1]
+        # FINDS LARGEST AND PLACES AT THE END OF THE ARRAY
+             # S          # L
+        # [5] ['', 4, 3, 2, 1] --L
+        # FINDS SMALLEST AND PLACES AT THE BEGINNING OF THE ARRAY
+             # S       # L
+        # [1] ['', 4, 3, 2, 5] -- S
+        # IF NOT INT(SELF.ITEM) PLACE IN MIDDLE
+                 # S   # L
+        # [''] [1, 4, 3, 2, 5]
+        # FINDS LARGEST AND PLACES AT THE END OF THE ARRAY
+                # S    # L
+        # [3] [1, 4, '', 2, 5] --L
+        # FINDS SMALLEST AND PLACES AT THE BEGINNING OF THE ARRAY
+                # S# L
+        # [2] [1, 3, '', 4, 5] --S
+        # IF L == S AND MIDDLE SWAP
+                   # LS
+        # [3] [1, 2, '', 4, 5] --L
+        # IF L == S AND MIDDLE SWAP
+                   # LS
+        # [''] [1, 2, 3, 4, 5] --L
+        if self._item == None:
+            if self._position == 0:
+                self.swap_item()
+
+        while self.can_move_right():
+            self.move_right()
+            if self.compare_item() == -1:
+                self.swap_item()
+            else:
+                return list
+
+        self.sort()
+        print(f'I am holding {self._item} at {self._position} where {self._list[self._position]} is located.')
+        return list
+
+        # for i in self._list:
+        #     for j in self._list:
+
+        # robot will pick up item
+        # what determines left vs right...?
+        # robot moves right or left
+        # compares item to position item
+        # swap if need be; moved if not
+        # if reaches end...
+            ## move back to original position
+            ## place item back move to next position
+            ## pick up item
+
+        
 
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
     # with `python robot_sort.py`
 
-    l = [15, 41, 58, 49, 26, 4, 28, 8, 61, 60, 65, 21, 78, 14, 35, 90, 54, 5, 0, 87, 82, 96, 43, 92, 62, 97, 69, 94, 99, 93, 76, 47, 2, 88, 51, 40, 95, 6, 23, 81, 30, 19, 25, 91, 18, 68, 71, 9, 66, 1, 45, 33, 3, 72, 16, 85, 27, 59, 64, 39, 32, 24, 38, 84, 44, 80, 11, 73, 42, 20, 10, 29, 22, 98, 17, 48, 52, 67, 53, 74, 77, 37, 63, 31, 7, 75, 36, 89, 70, 34, 79, 83, 13, 57, 86, 12, 56, 50, 55, 46]
+    # l = [15, 41, 58, 49, 26, 4, 28, 8, 61, 60, 65, 21, 78, 14, 35, 90, 54, 5, 0, 87, 82, 96, 43, 92, 62, 97, 69, 94, 99, 93, 76, 47, 2, 88, 51, 40, 95, 6, 23, 81, 30, 19, 25, 91, 18, 68, 71, 9, 66, 1, 45, 33, 3, 72, 16, 85, 27, 59, 64, 39, 32, 24, 38, 84, 44, 80, 11, 73, 42, 20, 10, 29, 22, 98, 17, 48, 52, 67, 53, 74, 77, 37, 63, 31, 7, 75, 36, 89, 70, 34, 79, 83, 13, 57, 86, 12, 56, 50, 55, 46]
+    l = [5, 4, 3, 2, 1]
 
     robot = SortingRobot(l)
 
