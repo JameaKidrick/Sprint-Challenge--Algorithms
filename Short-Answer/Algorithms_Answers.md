@@ -80,11 +80,21 @@ Run time may be halved, doubled, tripled, etc each step based on the the number 
 
 
 ## Exercise II
-Skeleton:
-O(n)
-run through array of 0 to len(building)
-if broken, return position
-find first position where egg is broken
+Most efficient method: Binary search - O(n)
+
+Cut the floor range in half
+Drop an egg
+If the egg breaks, cut the left side in half, drop an egg
+If the egg does not break, cut the right side in half, drop an egg
+Repeat until you find the floor
+
+
+Less efficient method: Linear search - O(n)
+
+Loop through range of 0 to the number of floors
+Drop an egg for each floor
+If broken, return position
+Stop loop
 
 Final Answer:
-
+Binary search is the most efficient because, although both binary and linear are O(n), the binary search takes less developer and computer time. Also, in terms of the problem, you are using less eggs.
