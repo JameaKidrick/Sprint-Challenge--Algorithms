@@ -98,59 +98,52 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # [5, 4, 3, 2, 1]
+        self.set_light_on()
+        while self.light_is_on():
+            while self.can_move_right():
+                if self.compare_item() == None:
+                    print(f'swapping {self._item} for {self._list[self._position]}')
+                    self.swap_item()
+                    self.set_light_on()
+                    self.move_right()
+    
+                if self.compare_item() == 1:
+                    print(f'{self._item} > {self._list[self._position]}')
+                    self.set_light_off()
+                else:
+                    print(f'{self._item} < {self._list[self._position]}')
+                    self.swap_item()
+                    self.set_light_on()
+    
+                self.move_right()
+                
+                if self.compare_item() == 1 and self.can_move_right() == False:
+                    print('found nothing bigger and can\'t move anymore')
+                    self.swap_item()
+                    self.set_light_on()
+    
+            while self.can_move_left():
+                if self.compare_item() == 1:
+                    print(f'GOING LEFT {self._item} < {self._list[self._position]}')
+                    self.swap_item()
+                    self.set_light_on()
+                elif self.compare_item() == -1:
+                    print(f'{self._item} < {self._list[self._position]}')
+                    self.set_light_off()
+    
+                self.move_left()
+    
+                if self.compare_item() == None and self.move_left() == False:
+                    print('found nothing smaller and can\'t move anymore')
+                    self.swap_item()
+                    self.set_light_on()
+                    self.move_right()
+                    return self._list
 
-        # robot will pick up item
-            # position = 0
-            # list[position] = 5
-            # 5
-        # moves position to find smallest number in list
-            # position = 4
-            # list[position] = 1
-            # item = 5
-        # compares item to position item
-            #  5 > 1
-        # swap
-            # [4, 3, 2, 5]
-            # item = 1
-        # moves left 1 to place smaller value
+        
+        
 
-        # [5, 4, 3, 2, 1]
-        # FINDS LARGEST AND PLACES AT THE END OF THE ARRAY
-             # S          # L
-        # [5] ['', 4, 3, 2, 1] --L
-        # FINDS SMALLEST AND PLACES AT THE BEGINNING OF THE ARRAY
-             # S       # L
-        # [1] ['', 4, 3, 2, 5] -- S
-        # IF NOT INT(SELF.ITEM) PLACE IN MIDDLE
-                 # S   # L
-        # [''] [1, 4, 3, 2, 5]
-        # FINDS LARGEST AND PLACES AT THE END OF THE ARRAY
-                # S    # L
-        # [3] [1, 4, '', 2, 5] --L
-        # FINDS SMALLEST AND PLACES AT THE BEGINNING OF THE ARRAY
-                # S# L
-        # [2] [1, 3, '', 4, 5] --S
-        # IF L == S AND MIDDLE SWAP
-                   # LS
-        # [3] [1, 2, '', 4, 5] --L
-        # IF L == S AND MIDDLE SWAP
-                   # LS
-        # [''] [1, 2, 3, 4, 5] --L
-        if self._item == None:
-            if self._position == 0:
-                self.swap_item()
-
-        while self.can_move_right():
-            self.move_right()
-            if self.compare_item() == -1:
-                self.swap_item()
-            else:
-                return list
-
-        self.sort()
-        print(f'I am holding {self._item} at {self._position} where {self._list[self._position]} is located.')
-        return list
+        
 
         # for i in self._list:
         #     for j in self._list:
@@ -165,7 +158,11 @@ class SortingRobot:
             ## place item back move to next position
             ## pick up item
 
-        
+        # Compare the held item with the item in front of the robot:
+        # If the held item's value is greater, return 1.
+        # If the held item's value is less, return -1.
+        # If the held item's value is equal, return 0.
+        # If either item is None, return None.
 
 
 if __name__ == "__main__":
