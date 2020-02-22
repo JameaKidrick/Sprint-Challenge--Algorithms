@@ -10,18 +10,18 @@ def count_th(word):
         global arr
         count = len(arr)
         arr = []
-        print(count) # COUNT IS FINE HERE
-        return count # RETURNS NONE
+        print(count)
+        return count
     else:
         arr.append('th')
-        word = word.replace('th', 'TH', 1)
+        word = word.replace('th', 'a', 1)
 
-    count_th(word)
+    return count_th(word)
 
 
-count_th('worthy') # 1
-count_th('') # 0
-count_th("abcthxyz") # 1
-count_th("abcthefthghith") # 3
-count_th("thhtthht") # 2
-count_th("THtHThth") # 1
+# count_th('worthy') # 1
+# count_th('') # 0
+# count_th("abcthxyz") # 1
+# count_th("abcthefthghith") # 3
+# count_th("thhtthht") # 2
+# count_th("THtHThth") # 1
